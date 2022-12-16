@@ -25,7 +25,7 @@ function handleClick(){
 }
 
   return (
-    <div>
+    <div className='input-weather'>
         <input className="input" onChange={handleInput} placeholder="input your city" value={input}></input>
         <Button handleClick={handleClick}/>
     </div>

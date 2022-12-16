@@ -9,18 +9,14 @@
   text-align: center;
   background-image: url("https://images.unsplash.com/photo-1512511708753-3150cd2ec8ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80") ;
   height: 100vh;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+ 
 }
 
 .neutral{
   text-align: center;
   background-image: url("https://images.unsplash.com/photo-1617141870851-3e8c8c172595?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80") ;
   height: 100vh;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  
 }
 
 .snow{
@@ -36,4 +32,15 @@
   background-color: white;
   opacity: 50%;
 }
+
+.history{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.icon{
+  max-width: 100px;
+  min-height: 100px;
+}
+
 

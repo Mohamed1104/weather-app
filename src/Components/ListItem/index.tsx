@@ -1,4 +1,5 @@
 import React from 'react'
+import "./listItem.css"
 
 type listItemProps = {
   data: any
@@ -6,7 +7,7 @@ type listItemProps = {
 
 function ListItem(props: listItemProps) {
   return (
-    <li>{props.data[0]}: {props.data[1]}</li>
+    <li className='li'>{props.data[0]}: {props.data[1]}°C</li>
   )
 }
 

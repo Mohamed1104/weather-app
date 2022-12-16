@@ -8,6 +8,7 @@ import { AllData}  from './types';
 
 function App() {
   const [className, setClassName] = useState('neutral')
+  const [imgSrc, setImgSrc] = useState("https://cdn-icons-png.flaticon.com/512/1163/1163624.png")
   const [city, setCity] = useState("London")
   const [weather, setWeather] = useState < AllData | null>(null)
   const [searchHistory, setSearchHistory] = useState<any>([])
@@ -34,6 +35,7 @@ function App() {
 
  useEffect(()=>{
   changeBackground()
+  changeImage()
  }, [weather])
 
 
@@ -56,6 +58,21 @@ function App() {
   }}
  }
 
+ function changeImage(){
+  
+  if (weather !== null){
+    const temp = weather?.main.temp;
+  if(temp < 10){
+    setImgSrc("https://cdn-icons-png.flaticon.com/512/615/615669.png")
+  }
+  if(temp >10){
+    setImgSrc("https://cdn-icons-png.flaticon.com/512/1163/1163624.png")
+  }
+  
+  }
+
+ }
+
  function handleHistory() {
   if (weather !== null) {
     const newSearch = [weather?.name, weather?.main.temp]
@@ -67,9 +84,10 @@ function App() {
   return (
     <div className={className}>
       <Input setCity={setCity} />
+      <img src={imgSrc} className="icon"/>
       {weather === null ? <p>Enter your city to find out current weather!</p> :
       <Display weather={weather}/> }
-      Your search history:
+       <div className='history'> Your search history: </div>
       <List searchHistory={searchHistory}/>
     </div>
   );
