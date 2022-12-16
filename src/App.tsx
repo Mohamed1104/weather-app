@@ -5,34 +5,43 @@ import Display from './Components/Display';
 import Input from './Components/Input'; 
 
 function App() {
-
+  const [className, setClassName] = useState('neutral')
   const [city, setCity] = useState("London")
-  // const [count, setCount] = useState(0)
-  const [weather, setWeather] = useState([])
+  const [weather, setWeather] = useState(null)
 
   // const key :string = process.env.API_KEY
   
-
   // fetch Api
  useEffect(()=>{
-  
   async function fetchApi (){
     const response = await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=9e4d7e2b08ce23aec75dd2d758cb8afe`)
     const data = await response.json()
     console.log(data)
-    console.log(city)
-    setWeather(data)
-    
-
+    if (data.cod === '404') {
+      alert("Oops! Did you enter the correct city?")
+      setWeather(null)
+    } else if (data.cod === 200) {
+      setWeather(data)
+    }
   }
-
   fetchApi()
-
  },[city])
+
+
+
+//  function changeBackground() {
+//    const description = weather.weather[0].description
+//    const descArr = description.split(' ')
+//    if (descArr.includes('rain')) {
+     
+//    }
+//  }
+
   return (
     <div className="App">
       <Input setCity={setCity} />
-      <Display weather={weather}/>
+      {weather === null ? <p>Enter your city to find out current weather!</p> :
+      <Display weather={weather}/> }
     
     </div>
   );
