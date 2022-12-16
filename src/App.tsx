@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './App.css';
+import Display from './Components/Display';
 import Input from './Components/Input'; 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
   return (
     <div className="App">
       <Input setCity={setCity} />
+      <Display weather={weather}/>
     
     </div>
   );
