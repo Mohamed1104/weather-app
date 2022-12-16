@@ -1,24 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
 import './App.css';
+import Input from './Components/Input'; 
 
 function App() {
+
+  const [city, setCity] = useState("London")
+  // const [count, setCount] = useState(0)
+  const [weather, setWeather] = useState([])
+
+  // const key :string = process.env.API_KEY
+  
+
+  // fetch Api
+ useEffect(()=>{
+  
+  async function fetchApi (){
+    const response = await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=9e4d7e2b08ce23aec75dd2d758cb8afe`)
+    const data = await response.json()
+    console.log(data)
+    console.log(city)
+    setWeather(data)
+    
+
+  }
+
+  fetchApi()
+
+ },[city])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Input setCity={setCity} />
+    
     </div>
   );
 }
