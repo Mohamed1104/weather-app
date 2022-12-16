@@ -1,21 +1,9 @@
 import React from 'react'
+import { AllData } from '../../types'
 
-type weatherObj = {
-  name: string,
-  main: {
-    temp: number,
-    feels_like: number, 
-    temp_max: number,
-    temp_min: number,
-    humidity: number
-  }
-  weather: [{
-    description: string
-  }]
-} 
 
 type DisplayProps = {
-    weather: weatherObj
+    weather: AllData
 }
 
 export default function Display(props: DisplayProps) {

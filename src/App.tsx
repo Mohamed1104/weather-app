@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Display from './Components/Display';
 import Input from './Components/Input'; 
+import { AllData}  from './types';
 
 function App() {
   const [className, setClassName] = useState('neutral')
   const [city, setCity] = useState("London")
-  const [weather, setWeather] = useState(null)
+  const [weather, setWeather] = useState < AllData | null>(null)
 
   // const key :string = process.env.API_KEY
   
@@ -24,21 +25,42 @@ function App() {
       setWeather(data)
     }
   }
+
   fetchApi()
+  
  },[city])
 
 
+ useEffect(()=>{
+  changeBackground()
+ }, [weather])
 
-//  function changeBackground() {
-//    const description = weather.weather[0].description
-//    const descArr = description.split(' ')
-//    if (descArr.includes('rain')) {
-     
-//    }
-//  }
+
+ function changeBackground() {
+  if(weather !== null){
+    const description = weather.weather[0].description
+    const descArr = description.split(' ')
+    console.log(descArr)
+   if (descArr.includes('clouds')) {
+     setClassName("clouds")
+   }
+   if (descArr.includes('clear')) {
+    setClassName("neutral")
+  }
+  if (descArr.includes('drizzle')) {
+    setClassName("rain")
+  }
+  if (descArr.includes('snow')) {
+    setClassName("snow")
+  }
+  }
+   
+ }
+
+ 
 
   return (
-    <div className="App">
+    <div className={className}>
       <Input setCity={setCity} />
       {weather === null ? <p>Enter your city to find out current weather!</p> :
       <Display weather={weather}/> }
