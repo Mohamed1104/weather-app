@@ -3,15 +3,17 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Display from './Components/Display';
 import Input from './Components/Input'; 
+import List from './Components/List';
 import { AllData}  from './types';
 
 function App() {
   const [className, setClassName] = useState('neutral')
   const [city, setCity] = useState("London")
   const [weather, setWeather] = useState < AllData | null>(null)
+  const [searchHistory, setSearchHistory] = useState<any>([])
 
   // const key :string = process.env.API_KEY
-  
+
   // fetch Api
  useEffect(()=>{
   async function fetchApi (){
@@ -25,9 +27,8 @@ function App() {
       setWeather(data)
     }
   }
-
   fetchApi()
-  
+  handleHistory()
  },[city])
 
 
@@ -52,11 +53,15 @@ function App() {
   }
   if (descArr.includes('snow')) {
     setClassName("snow")
-  }
-  }
-   
+  }}
  }
 
+ function handleHistory() {
+  if (weather !== null) {
+    const newSearch = [weather?.name, weather?.main.temp]
+    setSearchHistory([...searchHistory, newSearch])
+  }
+ }
  
 
   return (
@@ -64,7 +69,8 @@ function App() {
       <Input setCity={setCity} />
       {weather === null ? <p>Enter your city to find out current weather!</p> :
       <Display weather={weather}/> }
-    
+      Your search history:
+      <List searchHistory={searchHistory}/>
     </div>
   );
 }

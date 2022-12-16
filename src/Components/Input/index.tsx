@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Button from '../Button'
+import './input.css'
 
 
 type InputProps ={
@@ -25,7 +26,7 @@ function handleClick(){
 
   return (
     <div>
-        <input onChange={handleInput} placeholder="input your city" value={input}></input>
+        <input className="input" onChange={handleInput} placeholder="input your city" value={input}></input>
         <Button handleClick={handleClick}/>
     </div>
   )
